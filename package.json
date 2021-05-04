@@ -1,0 +1,28 @@
+{
+  "name": "erc_20_dex",
+  "version": "1.0.0",
+  "description": "This is an ERC20 DEX.  Here you can buy your favorite TKN without an intermediary. Selling you TKN has never been this easy...Just shoot the button. ;)",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^1.3.0",
+    "express": "^4.17.1",
+    "web3": "^1.3.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taurus-77/ERC_20_DEX.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taurus-77/ERC_20_DEX/issues"
+  },
+  "homepage": "https://github.com/taurus-77/ERC_20_DEX#readme"
+}
