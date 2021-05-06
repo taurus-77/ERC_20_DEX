@@ -15,6 +15,7 @@ export default function Home() {
   const [TokenContract, setTokenContract] = useState(() => undefined);
   const [account, setAccount] = useState(() => undefined);
   const [balance, setBalance] = useState(0);
+  const [tokenPrice, setTokenPrice] = useState(0);
 
   useEffect(async () => {
     try {
@@ -24,6 +25,8 @@ export default function Home() {
       setWeb3(W3.web3);
       setDexContract(W3.dexContract);
       setTokenContract(W3.tokenContract);
+      setTokenPrice(W3.tokenPrice);
+      console.log(W3.tokenPrice);
     } catch (error) {
       console.log(error);
     }
@@ -35,6 +38,7 @@ export default function Home() {
     let quantity = 0;
     try {
       quantity = event.target[0].value;
+      quantity = (Number.parseFloat(quantity) * (tokenPrice/ 10**18)).toString();
       quantity = web3.utils.toWei(quantity, 'ether');
       console.log(quantity);
       if (quantity <= 0) {
@@ -78,7 +82,7 @@ export default function Home() {
         <title>BUY TKN | DEX</title>
         <meta name="description" content="Purchase TKN" />
       </Head>
-      <Header></Header>
+      <Header tokenPrice={tokenPrice/10**18}></Header>
       <Toast
         className="bg-danger"
         onClose={() => setError('')}

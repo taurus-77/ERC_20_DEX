@@ -8,6 +8,7 @@ let account;
 let dexContract;
 let tokenContract;
 let balance;
+let tokenPrice;
 
 let events = [];
 
@@ -44,7 +45,10 @@ async function setupWeb3() {
   try {
     web3 = await getWeb3();
     dexContract = new web3.eth.Contract(dexABI.abi, contractsAddr.dex);
-    tokenContract = new web3.eth.Contract(tokenABI.abi, contractsAddr.token);
+    console.log(dexContract);
+    const tokenAddress = await dexContract.methods.getTokenAddress().call();
+
+    tokenContract = new web3.eth.Contract(tokenABI.abi, tokenAddress);
     const accounts = await web3.eth.getAccounts();
     account = accounts[0];
 
@@ -65,13 +69,20 @@ async function setupWeb3() {
     const b = await tokenContract.methods.balanceOf(accounts[0]).call({
       from: accounts[0]
     });
+
+    const tokenPrice = await dexContract.methods.getTokenPrice().call({
+      from: accounts[0]
+    });
+
+
     balance = web3.utils.fromWei(b);
     return {
       web3,
       dexContract,
       tokenContract,
       account,
-      balance
+      balance,
+      tokenPrice
     };
   } catch (error) {
     console.log(error);
